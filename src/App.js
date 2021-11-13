@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import reactDom from 'react-dom';
+import { useState } from 'react';
+import { Routes ,Route } from 'react-router-dom';
 
-function App() {
+import './App.css';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import PizzaDetail from './components/pizza/PizzaDetail';
+import PizzaList from './components/pizza/PizzaList';
+import Cart from './components/pizza/Cart';
+import SauceList from './components/pizza/SauceList';
+import NotFound from './components/NotFound';
+
+function App(){
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {reactDom.createPortal(<Navbar/>, document.getElementById('navbar'))}
+      {reactDom.createPortal(<Footer/>, document.getElementById('footer'))}
+      <div id="pizza-menu">
+        <Routes>
+          <Route path='/' exact element={<PizzaList/>}/>
+          <Route path='/pizzas' exact element={<PizzaList/>}/>
+          <Route path='/sauces' exact element={<SauceList/>}/>
+          <Route path='/cart' exact element={<Cart/>}/>
+          <Route path='*' exact element={<NotFound/>}/>
+        </Routes>
+      </div>
     </div>
   );
 }
