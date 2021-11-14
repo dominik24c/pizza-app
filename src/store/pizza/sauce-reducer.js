@@ -18,7 +18,7 @@ const sauceSlice = createSlice({
     initialState,
     reducers:{},
     extraReducers:{
-        [fetchSauces.loading]: (state,action)=>{
+        [fetchSauces.pending]: (state,action)=>{
             state.status = 'loading';
         },
         [fetchSauces.fulfilled]: (state,action)=>{

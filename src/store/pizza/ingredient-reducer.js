@@ -29,7 +29,7 @@ const ingredientSlice = createSlice({
 
     },
     extraReducers:{
-        [fetchIngredients.loading]:(state,action)=>{
+        [fetchIngredients.pending]:(state,action)=>{
             state.status='loading';
         },
         [fetchIngredients.fulfilled]:(state,action)=>{
