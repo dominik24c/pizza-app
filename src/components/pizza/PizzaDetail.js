@@ -1,48 +1,35 @@
-import { useState,useCallback,useEffect } from "react";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchIngredients, filterIngredients } from "../../store/pizza/ingredient-reducer";
 import Ingredient from "./Ingredient";
 
 const PizzaDetail = (props) => {
-    const [pizza, setPizza] = useState({});
-    const [ingredients, setIngredients] = useState([]);
-
-    setPizza({
-        "id":props.pizza.id,
-        "name":props.pizza.name,
-        "price":props.pizza.price,
-        "ingredients":props.pizza.ingredients.slice()
-    });
-
-    const getIngredients = useCallback(async()=>{
-        try{
-            const response = await fetch(`${URL}/ingredient`);
-            const data = await response.json();
-            const filteredIngredients = data.filter((ingredient)=>{
-                return ingredient.id.includes(pizza.ingredients);
-            })
-            setIngredients(filteredIngredients);
-        }catch(error){
-            console.log(error);
-        }
-        setIngredients()
-    });
+    const pizza = useSelector(state => state.pizza.selectedPizza)
+    const ingredients = useSelector(state => state.ingredient.ingredients)
+    const ingredientsOfPizza = useSelector(state => state.ingredient.ingredientsOfPizza)
+    const dispatch = useDispatch();
 
     useEffect(()=>{
-        getIngredients();
-    }, [ingredients,getIngredients]);
+        dispatch(fetchIngredients());
+    }, [dispatch]);
+
+    useEffect(()=>{
+        dispatch(filterIngredients(pizza.ingredients));
+    },[ingredients, pizza.ingredients, dispatch])
 
     const renderIngredients = () => {
-        return ingredients.map(ingredient =>{
+        return ingredientsOfPizza.map(ingredient =>{
             return <Ingredient 
-            key={ingredient.id}
-             name={ingredient.name}
-             price={ingredient.price}
+                    key={ingredient.id}
+                    name={ingredient.name}
+                    price={ingredient.price}
              />
         })
     }
     return (
         <>
-            <h3>{props.name}</h3>
-            <p><b>{props.price}$</b></p>
+            <h3>{pizza.name}</h3>
+            <p><b>{pizza.price}$</b></p>
             <p>Ingredients:</p>
             <ol>
                 {renderIngredients()}

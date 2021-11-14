@@ -1,11 +1,9 @@
 import reactDom from 'react-dom';
-import { useState } from 'react';
 import { Routes ,Route } from 'react-router-dom';
 
 import './App.css';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-import PizzaDetail from './components/pizza/PizzaDetail';
 import PizzaList from './components/pizza/PizzaList';
 import Cart from './components/pizza/Cart';
 import SauceList from './components/pizza/SauceList';

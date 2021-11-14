@@ -8,7 +8,7 @@ const Navbar = () =>
     return (
         <>
             <NavLink to="/">
-                <img src={pizzaLogo} height="50px"/>
+                <img src={pizzaLogo} height="50px" alt='pizza-logo'/>
             </NavLink>
             <ul>
                 <li>
@@ -19,7 +19,7 @@ const Navbar = () =>
                 </li>
             </ul>
             <NavLink to="/cart">
-                <img src={cartLogo} height="50px"/>
+                <img src={cartLogo} height="50px" alt='cart'/>
             </NavLink>
         </>
     );

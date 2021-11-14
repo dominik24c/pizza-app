@@ -1,19 +1,12 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect } from "react";
+import {useSelector,useDispatch} from 'react-redux';
+import { fetchSauces } from "../../store/pizza/sauce-reducer";
 import Sauce from "./Sauce";
 
 const SauceList = ()=>{
-    const [sauces, setSauces] =useState([]);
-
-    const getSauces = useCallback(async() => {
-        try{
-            const response = await fetch(`${URL}/sauce`);
-            const data = await response.json();
-            console.log(data);
-            setSauces(data);
-        }catch(error){
-            console.log(error);
-        }
-    });
+    const sauces =useSelector(state => state.sauce.sauces);
+    const status =useSelector(state => state.sauce.status);
+    const dispatch = useDispatch();
 
     const renderSauces = () =>{
         return sauces.map(sauce=>{
@@ -26,18 +19,16 @@ const SauceList = ()=>{
     };
 
     useEffect(()=>{
-        getSauces();
-    },[]);
+        dispatch(fetchSauces());
+    },[dispatch]);
 
     return (
-        <>
-        <h2>Sauces</h2>
-        {sauces && 
-            <div id="sauces">
-                {renderSauces()}
-            </div>
-        }
-        </>
+        <div id="sauces">
+            <h2>Sauces</h2>
+            {status==='loading' && <h2>Loading...</h2>}
+            {status==='success' &&renderSauces()}
+            {status==='failed' && <h2>Error! cannot connect to api!</h2>}
+        </div>
     );
 }
 
