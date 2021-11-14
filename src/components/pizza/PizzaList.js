@@ -14,9 +14,7 @@ const PizzaList = () => {
     const renderPizzas = () => {
         return pizzas.map(pizza=>{
             return <Pizza key={pizza.id}
-                          id={pizza.id}  
-                          name={pizza.name}
-                          price={pizza.price}/>
+                          pizza={pizza}/>
         });
 
     };

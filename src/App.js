@@ -5,7 +5,7 @@ import './App.css';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import PizzaList from './components/pizza/PizzaList';
-import Cart from './components/pizza/Cart';
+import Cart from './components/cart/Cart';
 import SauceList from './components/pizza/SauceList';
 import NotFound from './components/NotFound';
 

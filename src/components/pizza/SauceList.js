@@ -12,8 +12,7 @@ const SauceList = ()=>{
         return sauces.map(sauce=>{
             return <Sauce 
                     key={sauce.id} 
-                    name={sauce.name} 
-                    price={sauce.price}
+                    sauce={sauce}
             />
         });
     };
