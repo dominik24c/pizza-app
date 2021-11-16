@@ -3,6 +3,7 @@ import {useSelector,useDispatch } from 'react-redux';
 import Pizza from "./Pizza";
 import { fetchPizzas } from "../../store/pizza/pizza-reducer";
 import PizzaDetail from "./PizzaDetail";
+import Spinner from "../UI/Spinner";
 
 const PizzaList = () => {
     const pizzas = useSelector(state => state.pizza.pizzas);
@@ -21,16 +22,17 @@ const PizzaList = () => {
 
     useEffect(()=>{
         dispatch(fetchPizzas());
-    },[dispatch])
+    },[dispatch]);
 
     return (
         <>
         <div id="pizza-list">
-            {status==='loading' && <h2>Loading...</h2>}
-            {status==='success' &&renderPizzas()}
+            {status==='loading' && <Spinner/>}
+            {status==='success' && <h2>Menu: </h2>}
+            {status==='success' && renderPizzas()}
             {status==='failed' && <h2>Error! cannot connect to api!</h2>}
         </div>
-        {isShowPizzaDetail && 
+        {status!=='loading' && isShowPizzaDetail && 
             <div id="pizza-detail">
                 <PizzaDetail/>
             </div>

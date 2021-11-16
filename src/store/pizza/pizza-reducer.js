@@ -20,7 +20,7 @@ const pizzaSlice = createSlice({
     initialState,
     reducers:{
         showPizzaDetail: (state,action)=>{
-            console.log(action.payload);
+            // console.log(action.payload);
             const pizzaId = action.payload;
             state.selectedPizza = state.pizzas.find(pizza=> pizza.id===pizzaId);
             state.isShowPizzaDetail=true;
