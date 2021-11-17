@@ -4,6 +4,7 @@ import Pizza from "./Pizza";
 import { fetchPizzas } from "../../store/pizza/pizza-reducer";
 import PizzaDetail from "./PizzaDetail";
 import Spinner from "../UI/Spinner";
+import { Grid, List } from "@material-ui/core";
 
 const PizzaList = () => {
     const pizzas = useSelector(state => state.pizza.pizzas);
@@ -24,20 +25,34 @@ const PizzaList = () => {
         dispatch(fetchPizzas());
     },[dispatch]);
 
+    if (status==='loading'){
+        return <Spinner/>;
+    }
+
+    if (status==='failed'){
+        return <h2>Error! cannot connect to api!</h2>;
+    }
+
     return (
-        <>
-        <div id="pizza-list">
-            {status==='loading' && <Spinner/>}
-            {status==='success' && <h2>Menu: </h2>}
-            {status==='success' && renderPizzas()}
-            {status==='failed' && <h2>Error! cannot connect to api!</h2>}
-        </div>
-        {status!=='loading' && isShowPizzaDetail && 
+        <Grid container 
+              spacing={1}
+              >
+        <Grid item xs={6} >
+            <div id="pizza-list">
+                <h2>Menu: </h2>
+                <List>
+                    {renderPizzas()}
+                </List>
+            </div>
+        </Grid>
+        <Grid item xs={5} >
+        {isShowPizzaDetail && 
             <div id="pizza-detail">
                 <PizzaDetail/>
             </div>
             }
-        </>
+        </Grid>
+        </Grid>
 
     );
 }

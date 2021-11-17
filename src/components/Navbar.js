@@ -2,26 +2,36 @@ import { NavLink} from "react-router-dom";
 
 import pizzaLogo from '../img/pizza.png';
 import cartLogo from '../img/cart.png';
+import { AppBar, Box, IconButton, Toolbar } from "@material-ui/core";
+
+import styles from './Navbar.module.css';
+
 
 const Navbar = () =>
 {
     return (
-        <>
-            <NavLink to="/">
-                <img src={pizzaLogo} height="50px" alt='pizza-logo'/>
-            </NavLink>
-            <ul>
-                <li>
-                    <NavLink to="/pizzas">Pizzas</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/sauces">Sauces</NavLink>
-                </li>
-            </ul>
-            <NavLink to="/cart">
-                <img src={cartLogo} height="50px" alt='cart'/>
-            </NavLink>
-        </>
+        <AppBar position="static" className={styles.navbar}>
+            <Toolbar>
+            <IconButton edge="start">
+                <NavLink to="/">
+                    <img src={pizzaLogo} height="50px" alt='pizza-logo'/>
+                </NavLink>
+            </IconButton>
+            <Box display='flex' flexGrow={1}>
+                <NavLink to='/pizzas' className={styles.link}>
+                    Pizzas
+                </NavLink>
+                <NavLink to='/sauces' className={styles.link}>
+                    Sauces
+                </NavLink>
+            </Box>
+            <IconButton>
+                <NavLink to="/cart">
+                    <img src={cartLogo} height="50px" alt='cart'/>
+                </NavLink>
+            </IconButton>
+            </Toolbar>
+        </AppBar>
     );
 };
 

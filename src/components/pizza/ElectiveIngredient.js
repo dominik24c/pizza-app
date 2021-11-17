@@ -1,15 +1,24 @@
 import styles from './ElectiveIngredients.module.css';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
+import { Button, ListItem, Box } from '@material-ui/core';
 
 const ElectiveIngredient = (props) =>{    
     return (
-        <div className={props.isSelected ? styles.ElectiveIngredients_selected: styles.ElectiveIngredients_unselected}>
-            <p>{props.name}</p>
-            <small>Price: <b>{props.price}</b></small>
+        <ListItem className={props.isSelected ? styles.ElectiveIngredients_selected: styles.ElectiveIngredients_unselected}>
+            <Box display='flex' flexGrow={1}>
+                {props.name}
+            </Box>
+            <b>{props.price}$</b>
             {props.isSelected && 
-            <button type='button' onClick={props.deleteIngredientHandler}>-</button>}
-            {!props.isSelected &&
-             <button type='button' onClick={props.addIngredientHandler}>+</button>}
-        </div>
+            <Button onClick={props.deleteIngredientHandler}>
+                <RemoveIcon/>
+            </Button>}
+            {!props.isSelected && 
+            <Button onClick={props.addIngredientHandler}>
+                <AddIcon/>
+            </Button>}
+        </ListItem>
     )
 }
 

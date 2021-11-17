@@ -12,10 +12,8 @@ const PizzaWithIngredient = (props) => {
                 totalAmount={props.totalAmount}
                 totalPrice={props.totalPrice}
             >
-                <div>
-                    {props.ingredients && concatenateIngredients()}
-                    {!props.ingredients && <h4>No ingredients</h4>}
-                </div>
+                {props.ingredients && concatenateIngredients()}
+                {!props.ingredients && "No ingredients"}
             </Pizza>
     );
 }

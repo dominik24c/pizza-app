@@ -1,3 +1,5 @@
+import { Button } from "@material-ui/core";
+import AddIcon from '@mui/icons-material/Add';
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addPizzaWithChangedIngredients } from "../../store/pizza/cart-reducer";
@@ -83,17 +85,19 @@ const PizzaDetail = (props) => {
         })
     }
 
+    if(status==='loading'){
+        return <Spinner/>;
+    }
+
     return (
         <>
-            <h3>{pizza.name}</h3>
-            <p><b>{price}$</b></p>
-            {status==='loading' && <Spinner/>}
+            <h3>{pizza.name} {price}$</h3>
             {!isPizzaEdited && status==='success' && <p>Ingredients:</p>}
             {!isPizzaEdited && renderIngredients()}
-            {!isPizzaEdited && status==='success' && <button type="button" onClick={addPizza}>+</button>}
-            {!isPizzaEdited && status==='success'&& <button type="button" onClick={editPizza}>Edit Pizza</button>}
-            {isPizzaEdited && renderIngredientsToEdit()}
-            {isPizzaEdited && <button type="button" onClick={hideEditedIngredients}>Hide edited ingredients</button>}
+            {!isPizzaEdited && status==='success' && <Button onClick={addPizza}><AddIcon/></Button>}
+            {!isPizzaEdited && status==='success'&& <Button onClick={editPizza}>Edit Pizza</Button>}
+            {isPizzaEdited && status==='success' && renderIngredientsToEdit()}
+            {isPizzaEdited && <Button onClick={hideEditedIngredients}>Hide edited ingredients</Button>}
         </>
     );
 }

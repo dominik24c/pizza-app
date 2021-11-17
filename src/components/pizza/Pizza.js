@@ -1,9 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { showPizzaDetail } from '../../store/pizza/pizza-reducer';
 import { addPizza } from '../../store/pizza/cart-reducer'; 
-import pizzaImg from '../../img/pizza-btn.png';
-import detailImg from '../../img/show-detail.png';
-
+// import pizzaImg from '../../img/pizza-btn.png';
+// import detailImg from '../../img/show-detail.png';
+import { Box, Button, ListItem } from '@material-ui/core';
+import ReadMoreIcon from '@mui/icons-material/ReadMore';
+import AddIcon from '@mui/icons-material/Add';
 
 const Pizza = (props) => {
     const dispatch = useDispatch()
@@ -16,12 +18,20 @@ const Pizza = (props) => {
     }
 
     return (
-        <div>
-            <p>{props.pizza.name}</p> 
+        <ListItem>
+            <Box display='flex' flexGrow={1}>
+            <Box display='flex' flexGrow={1}>
+                <p>{props.pizza.name}</p> 
+            </Box>
             <p><b>{props.pizza.price}$</b></p>
-            <img src={pizzaImg} height="30px" alt='pizza-img' onClick={addPizzaHandler}/>
-            <img src={detailImg} height="30px" onClick={showPizzaDetailHandler} alt='detail-pizza-img'/>
-        </div>
+            <Button onClick={addPizzaHandler}>
+                <AddIcon/>
+            </Button>
+            <Button onClick={showPizzaDetailHandler}>
+                <ReadMoreIcon/>
+            </Button>
+            </Box>
+        </ListItem>
     );
 }
 

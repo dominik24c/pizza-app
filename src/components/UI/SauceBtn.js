@@ -1,5 +1,5 @@
 import sauceImg from '../../img/sauce.png';
-import './Sauce.css';
+import './SauceBtn.css';
 
 const SauceBtn = (props) =>{
     return (

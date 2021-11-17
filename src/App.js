@@ -9,12 +9,11 @@ import Cart from './components/cart/Cart';
 import SauceList from './components/pizza/SauceList';
 import NotFound from './components/NotFound';
 
-function App(){
+const App = () => {
   return (
     <div className="App">
       {reactDom.createPortal(<Navbar/>, document.getElementById('navbar'))}
       {reactDom.createPortal(<Footer/>, document.getElementById('footer'))}
-      <div id="pizza-menu">
         <Routes>
           <Route path='/' exact element={<PizzaList/>}/>
           <Route path='/pizzas' exact element={<PizzaList/>}/>
@@ -22,7 +21,6 @@ function App(){
           <Route path='/cart' exact element={<Cart/>}/>
           <Route path='*' exact element={<NotFound/>}/>
         </Routes>
-      </div>
     </div>
   );
 }

@@ -1,7 +1,9 @@
+import { ListItem, Box } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 
 import { addSauce } from '../../store/pizza/cart-reducer';
 import SauceBtn from '../UI/SauceBtn';
+import styles from './Sauce.module.css'; 
 
 const Sauce = (props) =>{
     const dispatch = useDispatch();
@@ -10,11 +12,15 @@ const Sauce = (props) =>{
         dispatch(addSauce(props.sauce));
     }
     return (
-        <div className="sauce">
-            <h3>{props.sauce.name}</h3>
-            <p>Price: <b>{props.sauce.price}</b></p>
+        <ListItem className={styles.Sauce}>
+            <Box display='flex' flexGrow={1}>
+            <Box display='flex' flexGrow={1}>
+                <p className={styles.Sauce__name}>{props.sauce.name}</p>
+            </Box>
+                <p className={styles.Sauce__price}>{props.sauce.price}$</p>
+            </Box>
             <SauceBtn clickHandler={()=>addSauceHandler()}/>
-        </div>
+        </ListItem>
     );
 }
 

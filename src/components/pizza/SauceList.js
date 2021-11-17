@@ -1,3 +1,4 @@
+import { List } from "@material-ui/core";
 import { useEffect } from "react";
 import {useSelector,useDispatch} from 'react-redux';
 import { fetchSauces } from "../../store/pizza/sauce-reducer";
@@ -23,12 +24,12 @@ const SauceList = ()=>{
     },[dispatch]);
 
     return (
-        <div id="sauces">
+        <List id="sauces">
             {status==='loading' && <Spinner/>}
             {status==='success' && <h2>Sauces</h2>}
             {status==='success' &&renderSauces()}
             {status==='failed' && <h2>Error! cannot connect to api!</h2>}
-        </div>
+        </List>
     );
 }
 
