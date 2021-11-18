@@ -6,7 +6,8 @@ import Pizza from "./Pizza";
 import Sauce from "./Sauce";
 import Spinner from "../UI/Spinner";
 import PizzaWithIngredient from "./PizzaWithIngredient";
-import { Button, TableContainer, Paper, TableHead, TableRow, TableCell, TableBody, Table } from "@material-ui/core";
+import { TableContainer, Paper, TableHead, TableRow, TableCell, TableBody, Table } from "@material-ui/core";
+import CustomButton from "../UI/CustomButton";
 import './Cart.css';
 
 const Cart = ()=>{
@@ -119,9 +120,9 @@ const Cart = ()=>{
         );
     }
 
-    let btnStyle = 'btn';
+    let btnStyle = '';
     if(pizzas.length===0 && pizzasWithChangedIngredients.length===0){
-        btnStyle+=' btn-disabled'
+        btnStyle+='btn-disabled'
     }
 
     return (
@@ -141,8 +142,8 @@ const Cart = ()=>{
             }
             { status === 'sending' && <Spinner/>}
             { status !== 'sending' && 
-            <Button className={btnStyle} onClick={orderPizzaHandler}>Order</Button>
-            }   
+                <CustomButton className={btnStyle} 
+                onClick={orderPizzaHandler}>Order</CustomButton>}
         </>
     );
 }

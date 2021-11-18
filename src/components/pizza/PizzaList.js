@@ -40,7 +40,7 @@ const PizzaList = () => {
         <Grid container 
               spacing={1}
               >
-        <Grid item xs={6} >
+        <Grid item xs={12} sm={12} md={6}>
             <div id="pizza-list">
 
                 <h2>Menu: </h2>
@@ -49,7 +49,7 @@ const PizzaList = () => {
                 </List>
             </div>
         </Grid>
-        <Grid item xs={5} >
+        <Grid item xs={12} sm={12} md={5} >
         {isShowPizzaDetail && 
             <div id="pizza-detail">
                 <PizzaDetail/>

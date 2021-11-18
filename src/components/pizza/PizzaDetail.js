@@ -7,6 +7,7 @@ import { addIngredient, deleteIngredient, fetchIngredients, filterIngredients, s
 import Spinner from "../UI/Spinner";
 import ElectiveIngredient from "./ElectiveIngredient";
 import Ingredient from "./Ingredient";
+import './PizzaDetail.css'
 
 const PizzaDetail = (props) => {
     const [isPizzaEdited, setIsPizzaEdited] = useState(false);
@@ -94,10 +95,14 @@ const PizzaDetail = (props) => {
             <h3>{pizza.name} {price}$</h3>
             {!isPizzaEdited && status==='success' && <p>Ingredients:</p>}
             {!isPizzaEdited && renderIngredients()}
-            {!isPizzaEdited && status==='success' && <Button onClick={addPizza}><AddIcon/></Button>}
-            {!isPizzaEdited && status==='success'&& <Button onClick={editPizza}>Edit Pizza</Button>}
+            {!isPizzaEdited && status==='success' && 
+            <>
+                <Button variant="contained" onClick={addPizza}><AddIcon/></Button>
+                <span className="btn_margin"></span>
+                <Button variant="contained" onClick={editPizza}>Edit Pizza</Button>
+            </>}
             {isPizzaEdited && status==='success' && renderIngredientsToEdit()}
-            {isPizzaEdited && <Button onClick={hideEditedIngredients}>Hide edited ingredients</Button>}
+            {isPizzaEdited && <Button variant="contained" onClick={hideEditedIngredients}>Hide edited ingredients</Button>}
         </>
     );
 }

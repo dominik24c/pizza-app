@@ -10,22 +10,3 @@ h3{
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
-
-.btn{
-    margin-top: 2 rem;
-    background-color: #2020d4b6;
-    color: white;
-    font-weight: bold;
-    border-radius: 20%;
-    padding: 0.5rem 1rem;
-}
-  
-.btn:hover{
-    background-color: #5555aa;
-}
-
-.btn-disabled{
-    cursor: not-allowed;
-    pointer-events: none;
-    opacity: 0.5;
-}

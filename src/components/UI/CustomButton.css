@@ -1,0 +1,24 @@
+.btn{
+    font-size: 1rem;
+    margin-top: 2 rem;
+    background-color: #2020d4b6;
+    border: 2px solid white;
+    color: white;
+    outline: none;
+    font-weight: bold;
+    border-radius: 20%;
+    padding: 0.75rem 1.5rem;
+}
+  
+.btn:hover{
+    cursor: pointer;
+    background-color: #e5e1e1;
+    border: 2px solid #2020d4b6;
+    color: #2020d4b6;
+}
+
+.btn-disabled{
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+}
