@@ -5,6 +5,7 @@
 
 html,body{
   height: 100%;
+  width: 100%;
 }
 
 body {
@@ -18,4 +19,24 @@ body {
 
 .border_bottom{
   border-bottom: 1px solid darkblue;
+}
+
+
+.pagewrap{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+} 
+
+#footer{
+  background-color: black;
+  padding: 1.2rem;
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  margin-top: 1rem;
+} 
+
+#root{
+  flex-grow: 1;
 }
