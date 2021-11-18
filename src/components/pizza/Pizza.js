@@ -1,8 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { showPizzaDetail } from '../../store/pizza/pizza-reducer';
 import { addPizza } from '../../store/pizza/cart-reducer'; 
-// import pizzaImg from '../../img/pizza-btn.png';
-// import detailImg from '../../img/show-detail.png';
 import { Box, Button, ListItem } from '@material-ui/core';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import AddIcon from '@mui/icons-material/Add';
@@ -18,19 +16,19 @@ const Pizza = (props) => {
     }
 
     return (
-        <ListItem>
+        <ListItem className='border_bottom'>
             <Box display='flex' flexGrow={1}>
             <Box display='flex' flexGrow={1}>
-                <p>{props.pizza.name}</p> 
+                {props.pizza.name}
             </Box>
-            <p><b>{props.pizza.price}$</b></p>
+            <b>{props.pizza.price}$</b>
+            </Box>
             <Button onClick={addPizzaHandler}>
                 <AddIcon/>
             </Button>
             <Button onClick={showPizzaDetailHandler}>
                 <ReadMoreIcon/>
             </Button>
-            </Box>
         </ListItem>
     );
 }

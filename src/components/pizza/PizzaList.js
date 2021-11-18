@@ -5,11 +5,12 @@ import { fetchPizzas } from "../../store/pizza/pizza-reducer";
 import PizzaDetail from "./PizzaDetail";
 import Spinner from "../UI/Spinner";
 import { Grid, List } from "@material-ui/core";
+import OrderMessage from "./OrderMessage";
 
 const PizzaList = () => {
     const pizzas = useSelector(state => state.pizza.pizzas);
     const status = useSelector(state=>state.pizza.status);
-    const isShowPizzaDetail = useSelector(state => state.pizza.isShowPizzaDetail)
+    const isShowPizzaDetail = useSelector(state => state.pizza.isShowPizzaDetail);
 
     const dispatch = useDispatch();
 
@@ -34,11 +35,14 @@ const PizzaList = () => {
     }
 
     return (
+        <>
+        <OrderMessage/>
         <Grid container 
               spacing={1}
               >
         <Grid item xs={6} >
             <div id="pizza-list">
+
                 <h2>Menu: </h2>
                 <List>
                     {renderPizzas()}
@@ -53,7 +57,7 @@ const PizzaList = () => {
             }
         </Grid>
         </Grid>
-
+        </>
     );
 }
 

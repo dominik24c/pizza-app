@@ -1,0 +1,9 @@
+.order-message{
+    background-color: #8cff8c;
+    border: 2px solid #016101c2;
+    border-radius: 5px;
+}
+
+.order-message h3{
+    color: #016101c2;
+}

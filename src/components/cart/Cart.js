@@ -80,13 +80,15 @@ const Cart = ()=>{
     const renderPizzaTable = ()=>{
         return (
             <TableContainer component={Paper}>
-                <Table>
+                <Table sx={{minWidth:650}}>
                     <TableHead>
-                        <TableCell>Pizza</TableCell>
-                        <TableCell>Ingredients</TableCell>
-                        <TableCell>Amount</TableCell>
-                        <TableCell>Price</TableCell>
-                        <TableCell></TableCell>
+                        <TableRow>
+                            <TableCell>Pizza</TableCell>
+                            <TableCell>Ingredients</TableCell>
+                            <TableCell>Amount</TableCell>
+                            <TableCell>Price</TableCell>
+                            <TableCell></TableCell>
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                         {renderPizzas()}
@@ -100,7 +102,7 @@ const Cart = ()=>{
     const renderSauceTable = () =>{
         return (
             <TableContainer component={Paper}>
-                <Table>
+                <Table sx={{minWidth:650}}>
                     <TableHead>
                         <TableRow>
                             <TableCell>Sauce</TableCell>

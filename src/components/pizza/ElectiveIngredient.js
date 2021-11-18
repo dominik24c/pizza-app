@@ -5,17 +5,17 @@ import { Button, ListItem, Box } from '@material-ui/core';
 
 const ElectiveIngredient = (props) =>{    
     return (
-        <ListItem className={props.isSelected ? styles.ElectiveIngredients_selected: styles.ElectiveIngredients_unselected}>
+        <ListItem className={styles.ingredient}>
             <Box display='flex' flexGrow={1}>
                 {props.name}
             </Box>
             <b>{props.price}$</b>
             {props.isSelected && 
-            <Button onClick={props.deleteIngredientHandler}>
+            <Button className={styles.remove_btn} onClick={props.deleteIngredientHandler}>
                 <RemoveIcon/>
             </Button>}
             {!props.isSelected && 
-            <Button onClick={props.addIngredientHandler}>
+            <Button className={styles.add_btn} onClick={props.addIngredientHandler}>
                 <AddIcon/>
             </Button>}
         </ListItem>
