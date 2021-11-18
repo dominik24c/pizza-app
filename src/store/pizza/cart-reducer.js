@@ -17,8 +17,15 @@ export const orderPizza = createAsyncThunk(
     'cart/orderPizza',
     async(arg,{getState,extra})=>{
         const state = getState().cart;
-        const pizzas = state.pizzas.map(p=>{
-            const idIngredientsArr = p.ingredients.map(i=>i.id);
+        const mergePizzas = [...state.pizzas,...state.pizzasWithChangedIngredients];
+        const pizzas = mergePizzas.map(p=>{
+            const idIngredientsArr = p.ingredients.map(i=>{
+                if(i instanceof Object){
+                    return i.id;
+                }else{
+                    return i;
+                }
+            });
             return {id: p.id, ingredients: idIngredientsArr};
         });
 
@@ -32,7 +39,7 @@ export const orderPizza = createAsyncThunk(
                 return {id:s.id, count:s.totalAmount}
             })
         }
-        // console.log(JSON.stringify(data));
+        console.log(JSON.stringify(data));
         return fetch(`${URL}/order`,{
             method:'POST',
             headers: {
@@ -40,7 +47,7 @@ export const orderPizza = createAsyncThunk(
               },
             body: JSON.stringify(data)
         })
-        .then(response=>response.json());
+        .then(response=>response.json())
     }
 )
 
@@ -151,6 +158,9 @@ const cartSlice = createSlice({
             state.sauces=[];
             state.totalPrice= 0;
             state.status = '';
+        },
+        resetMessages:(state,action)=>{
+            state.successMessage = '';
         }
     },
     extraReducers:{
@@ -158,6 +168,7 @@ const cartSlice = createSlice({
             state.status = 'sending';
         },
         [orderPizza.fulfilled]: (state,action)=>{
+            console.log(action.payload);
             state.successMessage = action.payload;
             state.status = 'success';
         },
@@ -176,7 +187,8 @@ export const {
     addSauce,
     addSauceById,
     deleteSauceById,
-    resetCart
+    resetCart,
+    resetMessages
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
