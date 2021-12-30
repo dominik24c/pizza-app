@@ -1,6 +1,6 @@
 const Footer = () =>{
     return <>
-        <small>&copy; Copyright 2021, Pizza App</small>
+        <p><b>&copy; Copyright 2021, Pizza App</b></p>
     </>;
 }
 
