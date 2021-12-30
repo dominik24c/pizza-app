@@ -4,9 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { orderPizza, resetCart } from "../../store/pizza/cart-reducer";
 import Pizza from "./Pizza";
 import Sauce from "./Sauce";
-import Spinner from "../UI/Spinner";
 import PizzaWithIngredient from "./PizzaWithIngredient";
-import { TableContainer, Paper, TableHead, TableRow, TableCell, TableBody, Table } from "@material-ui/core";
+import { TableContainer, Paper, TableHead, TableRow, TableCell, TableBody, Table, CircularProgress } from "@material-ui/core";
 import CustomButton from "../UI/CustomButton";
 import './Cart.css';
 
@@ -140,7 +139,7 @@ const Cart = ()=>{
             {status ==='failed' && 
                 <h4>Something went wrong! Try again or later!</h4>
             }
-            { status === 'sending' && <Spinner/>}
+            { status === 'sending' && <CircularProgress/>}
             { status !== 'sending' && 
                 <CustomButton className={btnStyle} 
                 onClick={orderPizzaHandler}>Order</CustomButton>}

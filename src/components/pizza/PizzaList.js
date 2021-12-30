@@ -3,8 +3,7 @@ import {useSelector,useDispatch } from 'react-redux';
 import Pizza from "./Pizza";
 import { fetchPizzas } from "../../store/pizza/pizza-reducer";
 import PizzaDetail from "./PizzaDetail";
-import Spinner from "../UI/Spinner";
-import { Grid, List } from "@material-ui/core";
+import { CircularProgress, Grid, List } from "@material-ui/core";
 import OrderMessage from "./OrderMessage";
 
 const PizzaList = () => {
@@ -27,7 +26,7 @@ const PizzaList = () => {
     },[dispatch]);
 
     if (status==='loading'){
-        return <Spinner/>;
+        return <CircularProgress/>;
     }
 
     if (status==='failed'){

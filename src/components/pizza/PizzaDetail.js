@@ -1,10 +1,9 @@
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import AddIcon from '@mui/icons-material/Add';
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addPizzaWithChangedIngredients } from "../../store/pizza/cart-reducer";
 import { addIngredient, deleteIngredient, fetchIngredients, filterIngredients, setPriceOfPizza } from "../../store/pizza/ingredient-reducer";
-import Spinner from "../UI/Spinner";
 import ElectiveIngredient from "./ElectiveIngredient";
 import Ingredient from "./Ingredient";
 import './PizzaDetail.css'
@@ -87,7 +86,7 @@ const PizzaDetail = (props) => {
     }
 
     if(status==='loading'){
-        return <Spinner/>;
+        return <CircularProgress/>;
     }
 
     return (
