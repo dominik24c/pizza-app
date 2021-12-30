@@ -2,16 +2,12 @@
 .link:visited,
 .link:active{
     text-align: center; 
-    color: darkblue;
+    font-weight: bold;
+    color: white;
     padding: 9px 30px;
     text-decoration: none;
 }
 
 .link:hover{
-    background-color: #3c587cbb;
-    color: white;
-}
-
-.navbar{
-    margin-bottom: 30px;
+    background-color: #086d3bbb;
 }

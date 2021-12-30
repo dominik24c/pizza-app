@@ -12,7 +12,7 @@ const Sauce = (props) =>{
         dispatch(addSauce(props.sauce));
     }
     return (
-        <ListItem className={styles.Sauce + ' border_bottom'}>
+        <ListItem className={styles.Sauce + ' border_bottom'} style={{borderColor:'#009900'}}>
             <Box display='flex' flexGrow={1}>
             <Box display='flex' flexGrow={1}>
                 <p className={styles.Sauce__name}>{props.sauce.name}</p>

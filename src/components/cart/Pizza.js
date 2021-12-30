@@ -1,9 +1,10 @@
-import { Button, TableCell, TableRow } from "@material-ui/core";
+import { ButtonGroup, TableCell, TableRow } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { addPizzaById,deletePizzaById } from "../../store/pizza/cart-reducer";
 
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import PrimaryButton from "../UI/PrimaryButton";
 
 const Pizza = (props) =>{
     const dispatch = useDispatch();
@@ -23,12 +24,14 @@ const Pizza = (props) =>{
             <TableCell>{props.totalAmount}</TableCell>
             <TableCell>{props.totalPrice}</TableCell>
             <TableCell>
-                <Button type="button" onClick={addPizza}>
-                    <AddIcon/>
-                </Button>
-                <Button type="button" onClick={deletePizza}>
-                    <RemoveIcon/>
-                </Button>
+                <ButtonGroup>
+                    <PrimaryButton isOutlined={true} onClickHandler={addPizza}>
+                        <AddIcon/>
+                    </PrimaryButton>
+                    <PrimaryButton isOutlined={true} onClickHandler={deletePizza}>
+                        <RemoveIcon/>
+                    </PrimaryButton>
+                </ButtonGroup>
             </TableCell>
         </TableRow>
     );

@@ -10,7 +10,12 @@ import styles from './Navbar.module.css';
 const Navbar = () =>
 {
     return (
-        <AppBar position="static" className={styles.navbar}>
+        <AppBar position="static" 
+            style={{
+                backgroundColor:'#009900',
+                marginBottom: '30px',
+            }}
+            >
             <Toolbar>
             <IconButton edge="start">
                 <NavLink to="/">

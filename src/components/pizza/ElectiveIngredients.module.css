@@ -1,27 +1,4 @@
 .ingredient{
-    border: 1px solid darkblue;
+    border: 1px solid #009900;
     margin-bottom: 0.5rem;
-}
-
-.remove_btn{
-    color: #bd122e;
-    background-color: #faa1b0;
-    border: 2px solid #bd122e;
-    border-radius: 2px;
-    padding: 0;
-    margin-left: 0.5rem;
-}
-
-.add_btn{
-    color: #016101c2;
-    background-color: #8cff8c;
-    border: 2px solid #016101c2;
-    border-radius: 2px;
-    padding: 0;
-    margin-left: 0.5rem;
-}
-
-.remove_btn:hover,
-.add_btn:hover{
-    opacity: 0.6;
 }

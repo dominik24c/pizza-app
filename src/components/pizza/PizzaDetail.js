@@ -1,9 +1,10 @@
-import { Button, CircularProgress } from "@material-ui/core";
+import { CircularProgress } from "@material-ui/core";
 import AddIcon from '@mui/icons-material/Add';
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addPizzaWithChangedIngredients } from "../../store/pizza/cart-reducer";
 import { addIngredient, deleteIngredient, fetchIngredients, filterIngredients, setPriceOfPizza } from "../../store/pizza/ingredient-reducer";
+import PrimaryButton from "../UI/PrimaryButton";
 import ElectiveIngredient from "./ElectiveIngredient";
 import Ingredient from "./Ingredient";
 import './PizzaDetail.css'
@@ -96,12 +97,12 @@ const PizzaDetail = (props) => {
             {!isPizzaEdited && renderIngredients()}
             {!isPizzaEdited && status==='success' && 
             <>
-                <Button variant="contained" onClick={addPizza}><AddIcon/></Button>
+                <PrimaryButton onClickHandler={addPizza}><AddIcon/></PrimaryButton>
                 <span className="btn_margin"></span>
-                <Button variant="contained" onClick={editPizza}>Edit Pizza</Button>
+                <PrimaryButton onClickHandler={editPizza}>Edit Pizza</PrimaryButton>
             </>}
             {isPizzaEdited && status==='success' && renderIngredientsToEdit()}
-            {isPizzaEdited && <Button variant="contained" onClick={hideEditedIngredients}>Hide edited ingredients</Button>}
+            {isPizzaEdited && <PrimaryButton onClickHandler={hideEditedIngredients}>Hide edited ingredients</PrimaryButton>}
         </>
     );
 }

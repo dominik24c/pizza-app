@@ -1,17 +1,18 @@
-import { Button, TableCell, TableRow } from "@material-ui/core";
+import { ButtonGroup, TableCell, TableRow } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { addSauceById,deleteSauceById } from "../../store/pizza/cart-reducer";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import PrimaryButton from "../UI/PrimaryButton";
 
 const Sauce = (props) =>{
     const dispatch = useDispatch();
 
-    const addPizza = () => {
+    const addSauce = () => {
         dispatch(addSauceById(props.id));
     }   
 
-    const deletePizza = () => {
+    const deleteSauce = () => {
         dispatch(deleteSauceById(props.id));
     }
 
@@ -21,12 +22,14 @@ const Sauce = (props) =>{
             <TableCell>{props.totalAmount}</TableCell>
             <TableCell>{props.totalPrice}</TableCell>
             <TableCell>
-                <Button onClick={addPizza}>
-                    <AddIcon/>
-                </Button>
-                <Button onClick={deletePizza}>
-                    <RemoveIcon/>
-                </Button>
+                <ButtonGroup >
+                    <PrimaryButton isOutlined={true} onClickHandler={addSauce}>
+                        <AddIcon/>
+                    </PrimaryButton>
+                    <PrimaryButton isOutlined={true} onClickHandler={deleteSauce}>
+                        <RemoveIcon/>
+                    </PrimaryButton>
+                </ButtonGroup>
             </TableCell>
         </TableRow>
     );
