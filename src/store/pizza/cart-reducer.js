@@ -8,6 +8,7 @@ const initialState ={
     pizzasWithChangedIngredients:[],
     sauces:[],
     totalPrice: 0,
+    totalAmount: 0,
     status:'',
     successMessage:'',
     errorMessage:''
@@ -59,6 +60,7 @@ const cartSlice = createSlice({
             const pizza = action.payload;
             addPizzaHandler(state,pizza);
             state.totalPrice += pizza.price;
+            state.totalAmount += 1;
         },
         addPizzaWithChangedIngredients: (state,action)=>{
             const pizza = action.payload.pizzaObj;
@@ -93,19 +95,22 @@ const cartSlice = createSlice({
                 state.pizzasWithChangedIngredients.push({...pizza, key:key, totalAmount:1})
             }
             state.totalPrice += pizza.price;
-
+            state.totalAmount += 1;
         },
+        
         addPizzaById:(state,action)=>{
             const pizzaId = action.payload;
             const pizzaIndex = state.pizzas.findIndex(p=>p.key===pizzaId);
             if(pizzaIndex!==-1){
                 state.pizzas[pizzaIndex].totalAmount+=1;
                 state.totalPrice += state.pizzas[pizzaIndex].price;   
+                state.totalAmount += 1;
             }else{
                 const pIndex = state.pizzasWithChangedIngredients.findIndex(p=>p.key===pizzaId);
                 if(pIndex!==-1){
                     state.pizzasWithChangedIngredients[pIndex].totalAmount+=1;
                     state.totalPrice += state.pizzasWithChangedIngredients[pIndex].price;   
+                    state.totalAmount += 1;
                 }
             }
         },
@@ -120,6 +125,7 @@ const cartSlice = createSlice({
                 state.pizzasWithChangedIngredients = pizzaObj.pizzasArr;
             }
             state.totalPrice -= pizzaObj.pizza.price;
+            state.totalAmount -= 1;
         },
 
         addSauce: (state,action)=>{
@@ -131,6 +137,7 @@ const cartSlice = createSlice({
                 state.sauces[sauceIndex].totalAmount+=1;
             }
             state.totalPrice += sauce.price;
+            state.totalAmount += 1;
 
         },
 
@@ -139,7 +146,8 @@ const cartSlice = createSlice({
             const sauceIndex = state.sauces.findIndex(s=>s.id===sauceId);
             if(sauceIndex!==-1){
                 state.sauces[sauceIndex].totalAmount+=1;
-                state.totalPrice += state.sauces[sauceIndex].price;    
+                state.totalPrice += state.sauces[sauceIndex].price; 
+                state.totalAmount += 1;   
             }
         },
         deleteSauceById: (state,action)=>{
@@ -151,12 +159,14 @@ const cartSlice = createSlice({
                 state.sauces = state.sauces.filter(s=>s.id !== sauceId);
             }
             state.totalPrice -= sauce.price;
+            state.totalAmount -= 1;
         },
         resetCart: (state,action)=>{
             state.pizzas=[];
             state.pizzasWithChangedIngredients=[];
             state.sauces=[];
             state.totalPrice= 0;
+            state.totalAmount = 0;
             state.status = '';
         },
         resetMessages:(state,action)=>{
