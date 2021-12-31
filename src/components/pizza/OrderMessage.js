@@ -12,14 +12,11 @@ const OrderMessage = () => {
 
     useEffect(()=>{
         if(successMessage){
-            const timer = setTimeout(()=>{
-        dispatch(resetMessages());
+        const timer = setTimeout(()=>{
+            dispatch(resetMessages());
         },5000);
 
-            return ()=>{
-           
-                clearTimeout(timer);
-            }
+        return ()=>clearTimeout(timer);
         }
     },[successMessage, dispatch]);
 

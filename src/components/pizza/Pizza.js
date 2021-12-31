@@ -17,7 +17,7 @@ const Pizza = (props) => {
     }
 
     return (
-        <ListItem className='border_bottom' style={{borderColor:'#009900'}}>
+        <ListItem className='border_bottom'>
             <Box display='flex' flexGrow={1}>
             <Box display='flex' flexGrow={1}>
                 {props.pizza.name}

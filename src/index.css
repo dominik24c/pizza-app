@@ -15,10 +15,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color:white;
 }
 
 .border_bottom{
-  border-bottom: 1px solid darkblue;
+  border-bottom: 1px solid #009900;
 }
 
 
@@ -34,9 +35,13 @@ body {
   text-align: center;
   color: white;
   font-size: 16px;
-  margin-top: 1rem;
 } 
 
 #root{
   flex-grow: 1;
+  background-image: url("./img/pizza-bg.jpg"); 
+  height: 100%; 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

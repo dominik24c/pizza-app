@@ -13,9 +13,8 @@ const Navbar = () =>
 
     const printTotalAmount = (totalAmount) => {
         if(totalAmount && totalAmount >= 10){
-            return `10+`;
+            return '10+';
         }
-        
         return totalAmount;
     }
 
@@ -37,7 +36,6 @@ const Navbar = () =>
         <AppBar position="static" 
             style={{
                 backgroundColor:'#009900',
-                marginBottom: '30px',
             }}
             >
             <Toolbar>

@@ -3,6 +3,12 @@
   width:900px;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 20px;
+}
+
+.App > section {
+  background-color: #201b1b9f;
+  padding: 10px;
 }
 
 @media screen and (max-width: 920px) {

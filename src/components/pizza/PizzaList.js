@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import {useSelector,useDispatch } from 'react-redux';
 import Pizza from "./Pizza";
 import { fetchPizzas } from "../../store/pizza/pizza-reducer";
 import PizzaDetail from "./PizzaDetail";
 import { CircularProgress, Grid, List } from "@material-ui/core";
-import OrderMessage from "./OrderMessage";
+import Title from "../UI/Title";
+import Error from "../errors/Error";
 
 const PizzaList = () => {
     const pizzas = useSelector(state => state.pizza.pizzas);
@@ -30,25 +31,23 @@ const PizzaList = () => {
     }
 
     if (status==='failed'){
-        return <h2>Error! cannot connect to api!</h2>;
+        return <Error/>;
     }
 
     return (
-        <>
-        <OrderMessage/>
+        <div>
         <Grid container 
               spacing={1}
               >
         <Grid item xs={12} sm={12} md={6}>
             <div id="pizza-list">
-
-                <h2>Menu: </h2>
+                <Title>Menu: </Title>
                 <List>
                     {renderPizzas()}
                 </List>
             </div>
         </Grid>
-        <Grid item xs={12} sm={12} md={5} >
+        <Grid item xs={12} sm={12} md={6} >
         {isShowPizzaDetail && 
             <div id="pizza-detail">
                 <PizzaDetail/>
@@ -56,7 +55,7 @@ const PizzaList = () => {
             }
         </Grid>
         </Grid>
-        </>
+        </div>
     );
 }
 

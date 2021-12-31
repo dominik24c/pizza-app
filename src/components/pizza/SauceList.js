@@ -1,8 +1,12 @@
-import { CircularProgress, List } from "@material-ui/core";
+import { Box, CircularProgress, List } from "@material-ui/core";
 import { useEffect } from "react";
 import {useSelector,useDispatch} from 'react-redux';
 import { fetchSauces } from "../../store/pizza/sauce-reducer";
+import Error from "../errors/Error";
+import SauceIcon from "../UI/SauceIcon";
+import Title from "../UI/Title";
 import Sauce from "./Sauce";
+
 
 const SauceList = ()=>{
     const sauces =useSelector(state => state.sauce.sauces);
@@ -25,9 +29,12 @@ const SauceList = ()=>{
     return (
         <List id="sauces">
             {status==='loading' && <CircularProgress/>}
-            {status==='success' && <h2>Sauces</h2>}
+            {status==='success' && 
+            <Box style={{display:'flex', justifyContent:'center'}}>
+                <Title>Sauces</Title><SauceIcon/>
+            </Box>}
             {status==='success' && renderSauces()}
-            {status==='failed' && <h2>Error! cannot connect to api!</h2>}
+            {status==='failed' && <Error/>}
         </List>
     );
 }

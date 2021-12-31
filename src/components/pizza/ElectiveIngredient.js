@@ -1,7 +1,7 @@
 import styles from './ElectiveIngredients.module.css';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import { Button, ListItem, Box } from '@material-ui/core';
+import { ListItem, Box } from '@material-ui/core';
 import PrimaryButton from '../UI/PrimaryButton';
 
 const ElectiveIngredient = (props) =>{    

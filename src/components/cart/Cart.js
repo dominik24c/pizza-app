@@ -5,9 +5,10 @@ import { orderPizza, resetCart } from "../../store/pizza/cart-reducer";
 import Pizza from "./Pizza";
 import Sauce from "./Sauce";
 import PizzaWithIngredient from "./PizzaWithIngredient";
-import { TableContainer, Paper, TableHead, TableRow, TableCell, TableBody, Table, CircularProgress } from "@material-ui/core";
+import { CircularProgress, List } from "@material-ui/core";
 import CustomButton from "../UI/CustomButton";
 import './Cart.css';
+import Title from "../UI/Title";
 
 const Cart = ()=>{
     const pizzas = useSelector(state=>state.cart.pizzas);
@@ -79,43 +80,18 @@ const Cart = ()=>{
 
     const renderPizzaTable = ()=>{
         return (
-            <TableContainer component={Paper}>
-                <Table sx={{minWidth:650}}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Pizza</TableCell>
-                            <TableCell>Ingredients</TableCell>
-                            <TableCell>Amount</TableCell>
-                            <TableCell>Price</TableCell>
-                            <TableCell></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {renderPizzas()}
-                        {renderPizzasWithChangedIngredients()}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <List>
+                {renderPizzas()}
+                {renderPizzasWithChangedIngredients()}
+            </List>
         );
     }
 
     const renderSauceTable = () =>{
         return (
-            <TableContainer component={Paper}>
-                <Table sx={{minWidth:650}}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Sauce</TableCell>
-                            <TableCell>Amount</TableCell>
-                            <TableCell>Price</TableCell>
-                            <TableCell></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {renderSauces()}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            <List>
+                {renderSauces()}
+            </List>
         );
     }
 
@@ -126,7 +102,7 @@ const Cart = ()=>{
 
     return (
         <>
-            <h1>My cart:</h1>
+            <Title>Your cart:</Title>
             {sauces.length!==0 && pizzas.length===0 && 
             pizzasWithChangedIngredients.length===0 &&
             <h3>You have to add at least one pizza!</h3>}
