@@ -73,7 +73,8 @@ const cartSlice = createSlice({
 
             let isNotEditedPizza = false;
             console.log('length '+ingredientsOfPizza.length  +" "+ pizza.ingredients.length)
-            if(ingredientsOfPizza.length === pizza.ingredients.length){
+            if(ingredientsOfPizza.length === searchedPizza.ingredients.length &&
+                pizza.ingredients.length === searchedPizza.ingredients.length){
                 isNotEditedPizza = true;
             }
 
@@ -87,7 +88,7 @@ const cartSlice = createSlice({
                 console.log('add pizza')
                 addPizzaHandler(state,pizza);
             }else if (isInPizzasWithChangedIngredients!==-1){
-                console.log('add pizza second')
+                console.log('add next pizza')
                 addPizzaWithChangedIngredientsHandler(state,pizza,isInPizzasWithChangedIngredients);
             }else{
                 console.log('add new pizza generated')

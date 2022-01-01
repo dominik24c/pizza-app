@@ -100,7 +100,7 @@ const Cart = ()=>{
         btnStyle+='btn-disabled'
     }
 
-    return (
+    const orderTemplate =  (
         <>
             <Title>Your cart:</Title>
             {sauces.length!==0 && pizzas.length===0 && 
@@ -112,10 +112,19 @@ const Cart = ()=>{
             {sauces.length>0 && renderSauceTable()}
 
             <p className="price">Total price: <b>{totalPrice}$</b></p>
+        </>
+    );
+
+    return (
+        <>
+            {!status && orderTemplate}
             {status ==='failed' && 
                 <h4>Something went wrong! Try again or later!</h4>
             }
-            { status === 'sending' && <CircularProgress/>}
+            { status === 'sending' && <>
+                <Title>Sending your order!</Title>
+                <CircularProgress/>
+            </>}
             { status !== 'sending' && 
                 <CustomButton className={btnStyle} 
                 onClick={orderPizzaHandler}>Order</CustomButton>}

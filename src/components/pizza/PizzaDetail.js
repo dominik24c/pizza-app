@@ -28,7 +28,7 @@ const PizzaDetail = (props) => {
     useEffect(()=>{
         dispatch(filterIngredients(pizza.ingredients));
         dispatch(setPriceOfPizza(pizza.price));
-    },[ingredients, pizza.ingredients, dispatch])
+    },[ingredients, pizza.ingredients, pizza.price, dispatch])
 
     const renderIngredients = () => {
         return choosenIngredientOfPizza.map(ingredient =>{

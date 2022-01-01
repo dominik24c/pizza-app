@@ -7,17 +7,17 @@ import PrimaryButton from "./PrimaryButton";
 const ProductListItem = (props) =>{
     return (
         <ListItem>
-        <Box display="flex" flexGrow={1}>
-            {props.children}
-        </Box>
-        <ButtonGroup >
-            <PrimaryButton isOutlined={true} onClickHandler={props.addButtonHandler}>
-                <AddIcon/>
-            </PrimaryButton>
-            <PrimaryButton isOutlined={true} onClickHandler={props.deleteButtonHandler}>
-                <RemoveIcon/>
-            </PrimaryButton>
-        </ButtonGroup>
+            <Box display="flex" flexGrow={1}>
+                {props.children}
+            </Box>
+            <ButtonGroup >
+                <PrimaryButton isOutlined={true} onClickHandler={props.addButtonHandler}>
+                    <AddIcon/>
+                </PrimaryButton>
+                <PrimaryButton isOutlined={true} onClickHandler={props.deleteButtonHandler}>
+                    <RemoveIcon/>
+                </PrimaryButton>
+            </ButtonGroup>
         </ListItem>
     );
 }

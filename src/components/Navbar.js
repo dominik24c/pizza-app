@@ -45,7 +45,7 @@ const Navbar = () =>
                 </NavLink>
             </IconButton>
             <Box display='flex' flexGrow={1}>
-                <NavLink to='/pizzas' className={styles.link}>
+                <NavLink to='/' className={styles.link}>
                     Pizzas
                 </NavLink>
                 <NavLink to='/sauces' className={styles.link}>

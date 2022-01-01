@@ -1,7 +1,6 @@
 import { Grid } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { addPizzaById,deletePizzaById } from "../../store/pizza/cart-reducer";
-
 import ProductListItem from "../UI/ProductListItem";
 
 const Pizza = (props) =>{
@@ -19,12 +18,12 @@ const Pizza = (props) =>{
         <ProductListItem
             addButtonHandler={addPizza}
             deleteButtonHandler={deletePizza}
-        >
-            <Grid Container>
-                <Grid item>
+            >
+            <Grid container>
+                <Grid item xs={12}>
                     {`${props.name } - ${props.totalAmount}x ${props.totalPrice}$`}
                 </Grid>
-                <Grid item>
+                <Grid item xs={12}>
                     {props.children}
                 </Grid>
             </Grid>
