@@ -24,6 +24,9 @@ const pizzaSlice = createSlice({
             const pizzaId = action.payload;
             state.selectedPizza = state.pizzas.find(pizza=> pizza.id===pizzaId);
             state.isShowPizzaDetail=true;
+        },
+        resetIsShowPizzaDetail: (state,action)=>{
+            state.isShowPizzaDetail=false;
         }
     },
     extraReducers:{
@@ -40,6 +43,6 @@ const pizzaSlice = createSlice({
     }
 })
 
-export const {showPizzaDetail} = pizzaSlice.actions;
+export const {showPizzaDetail, resetIsShowPizzaDetail} = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;

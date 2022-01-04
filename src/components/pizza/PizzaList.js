@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {useSelector,useDispatch } from 'react-redux';
 import Pizza from "./Pizza";
-import { fetchPizzas } from "../../store/pizza/pizza-reducer";
+import { fetchPizzas, resetIsShowPizzaDetail } from "../../store/pizza/pizza-reducer";
 import PizzaDetail from "./PizzaDetail";
 import { CircularProgress, Grid, List } from "@material-ui/core";
 import Title from "../UI/Title";
@@ -24,6 +24,10 @@ const PizzaList = () => {
 
     useEffect(()=>{
         dispatch(fetchPizzas());
+
+        return ()=>{
+            dispatch(resetIsShowPizzaDetail())
+        }
     },[dispatch]);
 
     if (status==='loading'){
