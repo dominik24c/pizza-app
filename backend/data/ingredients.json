@@ -1,0 +1,47 @@
+[
+  {
+    "id": "65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+    "name": "sos",
+    "price": 1
+  },
+  {
+    "id": "a6fe40e5-ecbe-42e0-a838-add4c55a450f",
+    "name": "ser",
+    "price": 2
+  },
+  {
+    "id": "9e9f2741-e752-44c6-a05c-a1483f25982e",
+    "name": "pieczarki",
+    "price": 2
+  },
+  {
+    "id": "3fc9f650-d7ec-46f5-97b8-b776982b716e",
+    "name": "szynka",
+    "price": 3
+  },
+  {
+    "id": "ef9eff06-7167-4ee5-b7b0-b31524785a13",
+    "name": "salami",
+    "price": 3
+  },
+  {
+    "id": "f131964d-203b-46de-8652-9b75e8c505f1",
+    "name": "ananas",
+    "price": 2
+  },
+  {
+    "id": "7f6467b9-6554-430b-bf20-75e71dc806f9",
+    "name": "papryka",
+    "price": 2
+  },
+  {
+    "id": "2bc0c2fd-ddf8-4f41-b189-fed8bb616369",
+    "name": "cebula",
+    "price": 2
+  },
+  {
+    "id": "b14f3541-1781-4871-b5b6-d3eb77d1ed28",
+    "name": "pomidor",
+    "price": 2
+  }
+]

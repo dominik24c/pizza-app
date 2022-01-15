@@ -1,0 +1,99 @@
+[
+  {
+    "id": "921578dc-08f4-4060-9915-fbc97552ffe2",
+    "name": "MARGHERITA",
+    "price": 15,
+    "ingredients": [
+      "65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+      "a6fe40e5-ecbe-42e0-a838-add4c55a450f"
+    ]
+  },
+  {
+    "id": "03c07fc7-02ca-4dbe-bf30-991bb9b6d345",
+    "name": "FUNGHI",
+    "price": 16,
+    "ingredients": [
+      "65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+      "a6fe40e5-ecbe-42e0-a838-add4c55a450f",
+      "9e9f2741-e752-44c6-a05c-a1483f25982e"
+    ]
+  },
+  {
+    "id": "8707c62c-be63-49ef-aa46-06b91e0f6b6e",
+    "name": "VESUVIO",
+    "price": 17,
+    "ingredients": [
+      "65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+      "a6fe40e5-ecbe-42e0-a838-add4c55a450f",
+      "3fc9f650-d7ec-46f5-97b8-b776982b716e"
+    ]
+  },
+  {
+    "id": "8fd3e95c-315e-4f04-8be9-75f7881adf52",
+    "name": "SALAMI",
+    "price": 17,
+    "ingredients": [
+      "65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+      "a6fe40e5-ecbe-42e0-a838-add4c55a450f",
+      "ef9eff06-7167-4ee5-b7b0-b31524785a13"
+    ]
+  },
+  {
+    "id": "1f11f2be-b521-4dc7-9ec1-3787c3598f34",
+    "name": "CAPRICCIOSA",
+    "price": 20,
+    "ingredients": [
+      "65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+      "a6fe40e5-ecbe-42e0-a838-add4c55a450f",
+      "9e9f2741-e752-44c6-a05c-a1483f25982e",
+      "3fc9f650-d7ec-46f5-97b8-b776982b716e"
+    ]
+  },
+  {
+    "id": "e9325314-1f11-4bbc-997c-c2b0fa7efc85",
+    "name": "HAWAJSKA",
+    "price": 20,
+    "ingredients": [
+      "65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+      "a6fe40e5-ecbe-42e0-a838-add4c55a450f",
+      "3fc9f650-d7ec-46f5-97b8-b776982b716e",
+      "f131964d-203b-46de-8652-9b75e8c505f1"
+    ]
+  },
+  {
+    "id": "4d24bf73-8065-4f63-8f61-118560f2afd9",
+    "name": "VERONA",
+    "price": 21,
+    "ingredients": [
+      "65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+      "a6fe40e5-ecbe-42e0-a838-add4c55a450f",
+      "ef9eff06-7167-4ee5-b7b0-b31524785a13",
+      "f131964d-203b-46de-8652-9b75e8c505f1"
+    ]
+  },
+  {
+    "id": "aa2fddb1-5a53-4846-8786-fca58c897af7",
+    "name": "ROMA",
+    "price": 22,
+    "ingredients": [
+      "65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+      "a6fe40e5-ecbe-42e0-a838-add4c55a450f",
+      "ef9eff06-7167-4ee5-b7b0-b31524785a13",
+      "2bc0c2fd-ddf8-4f41-b189-fed8bb616369",
+      "b14f3541-1781-4871-b5b6-d3eb77d1ed28"
+    ]
+  },
+  {
+    "id": "7fe9a823-fc1d-4ed8-bb1c-21ef454e9542",
+    "name": "COLOSSEUM",
+    "price": 22,
+    "ingredients": [
+      "65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+      "a6fe40e5-ecbe-42e0-a838-add4c55a450f",
+      "9e9f2741-e752-44c6-a05c-a1483f25982e",
+      "3fc9f650-d7ec-46f5-97b8-b776982b716e",
+      "7f6467b9-6554-430b-bf20-75e71dc806f9",
+      "2bc0c2fd-ddf8-4f41-b189-fed8bb616369"
+    ]
+  }
+]
