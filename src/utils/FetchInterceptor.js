@@ -1,35 +1,34 @@
 import fetchIntercept from 'fetch-intercept';
 
 const FetchInterceptor = () => {
-        fetchIntercept.register({
-          request: function (url, config) {
+    fetchIntercept.register({
+        request: function (url, config) {
             const headers = {
                 'Content-type': 'application/json',
-                'Access-Control-Allow-Origin':'*'
             };
-            
+
             const newConfig = {
+                ...config,
                 mode: 'cors',
                 headers: headers,
-                ...config
             };
 
             console.log(newConfig);
             return [url, newConfig];
-          },
-      
-          requestError: function (error) {
+        },
+
+        requestError: function (error) {
             return Promise.reject(error);
-          },
-      
-          response: function (response) {
+        },
+
+        response: function (response) {
             return response;
-          },
-      
-          responseError: function (error) {
+        },
+
+        responseError: function (error) {
             return Promise.reject(error);
-          },
-        });
+        },
+    });
 };
 
 export default FetchInterceptor;
