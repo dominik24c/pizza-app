@@ -34,9 +34,12 @@ def test_get_list_of_pizzas(client):
 
 def test_create_full_valid_order_of_pizza(client):
     data = _test_post_create_item(client, '/api/order', {
-        "pizza": [{"id": "123", "ingredients": ["1", "2", "3"]}],
-        "sauce": [{"id": "2", "count": 43}],
-        "total": "89.30"
+        "pizza": [{"id": "921578dc-08f4-4060-9915-fbc97552ffe2",
+                   "ingredients": ["65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+                                   "2bc0c2fd-ddf8-4f41-b189-fed8bb616369",
+                                   "b14f3541-1781-4871-b5b6-d3eb77d1ed28"]}],
+        "sauce": [{"id": "307b968e-9c38-40f2-8fdb-80c5a6fe6bd7", "count": 43}],
+        "total": 89.30
     }, 201)
 
     assert data['message'] == 'Order accepted!'
@@ -44,8 +47,11 @@ def test_create_full_valid_order_of_pizza(client):
 
 def test_create_valid_order_of_pizza_without_sauce(client):
     data = _test_post_create_item(client, '/api/order', {
-        "pizza": [{"id": "123", "ingredients": ["1", "2", "3"]}],
-        "total": "89.30"
+        "pizza": [{"id": "921578dc-08f4-4060-9915-fbc97552ffe2",
+                   "ingredients": ["65f40ae8-4ac5-426d-ab98-9d8b1ea21edf",
+                                   "2bc0c2fd-ddf8-4f41-b189-fed8bb616369",
+                                   "b14f3541-1781-4871-b5b6-d3eb77d1ed28"]}],
+        "total": 89.30
     }, 201)
 
     assert data['message'] == 'Order accepted!'
@@ -53,8 +59,8 @@ def test_create_valid_order_of_pizza_without_sauce(client):
 
 def test_create_valid_order_of_pizza_without_ingredient_of_pizza(client):
     data = _test_post_create_item(client, '/api/order', {
-        "pizza": [{"id": "123"}],
-        "total": "89.30"
+        "pizza": [{"id": "921578dc-08f4-4060-9915-fbc97552ffe2"}],
+        "total": 89.30
     }, 201)
 
     assert data['message'] == 'Order accepted!'
