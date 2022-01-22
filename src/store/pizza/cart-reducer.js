@@ -19,7 +19,8 @@ export const orderPizza = createAsyncThunk(
     async(arg,{getState,extra})=>{
         const state = getState().cart;
         const mergePizzas = [...state.pizzas,...state.pizzasWithChangedIngredients];
-        const pizzas = mergePizzas.map(p=>{
+        const pizzasWithTotalAmount = mergePizzas.map(p=>{
+            console.log(p);
             const idIngredientsArr = p.ingredients.map(i=>{
                 if(i instanceof Object){
                     return i.id;
@@ -27,8 +28,15 @@ export const orderPizza = createAsyncThunk(
                     return i;
                 }
             });
-            return {id: p.id, ingredients: idIngredientsArr};
+            return {id: p.id, ingredients: idIngredientsArr, totalAmount: p.totalAmount};
         });
+
+        const pizzas = [];
+        for(const pizza of pizzasWithTotalAmount){
+            for(let i=0;i<pizza.totalAmount;i++){
+                pizzas.push({id:pizza.id,ingredients: pizza.ingredients})
+            }
+        }
 
         const data = {
             pizza: pizzas,
@@ -66,7 +74,7 @@ const cartSlice = createSlice({
             const pizza = action.payload.pizzaObj;
             const orginalPizzasArr = action.payload.orginalPizzas;
 
-            const searchedPizza = orginalPizzasArr.find(p=>p.id===pizza.id);            
+            const searchedPizza = orginalPizzasArr.find(p=>p.id===pizza.id);
             const ingredientsOfPizza = pizza.ingredients.filter(p => {
                 return searchedPizza.ingredients.includes(p.id)
             });
@@ -98,26 +106,26 @@ const cartSlice = createSlice({
             state.totalPrice += pizza.price;
             state.totalAmount += 1;
         },
-        
+
         addPizzaById:(state,action)=>{
             const pizzaId = action.payload;
             const pizzaIndex = state.pizzas.findIndex(p=>p.key===pizzaId);
             if(pizzaIndex!==-1){
                 state.pizzas[pizzaIndex].totalAmount+=1;
-                state.totalPrice += state.pizzas[pizzaIndex].price;   
+                state.totalPrice += state.pizzas[pizzaIndex].price;
                 state.totalAmount += 1;
             }else{
                 const pIndex = state.pizzasWithChangedIngredients.findIndex(p=>p.key===pizzaId);
                 if(pIndex!==-1){
                     state.pizzasWithChangedIngredients[pIndex].totalAmount+=1;
-                    state.totalPrice += state.pizzasWithChangedIngredients[pIndex].price;   
+                    state.totalPrice += state.pizzasWithChangedIngredients[pIndex].price;
                     state.totalAmount += 1;
                 }
             }
         },
         deletePizzaById: (state,action)=>{
             const pizzaId = action.payload;
-        
+
             let pizzaObj = deletePizzaByIdHandler(state.pizzas,pizzaId);
             if(pizzaObj.pizza){
                 state.pizzas = pizzaObj.pizzasArr;
@@ -147,8 +155,8 @@ const cartSlice = createSlice({
             const sauceIndex = state.sauces.findIndex(s=>s.id===sauceId);
             if(sauceIndex!==-1){
                 state.sauces[sauceIndex].totalAmount+=1;
-                state.totalPrice += state.sauces[sauceIndex].price; 
-                state.totalAmount += 1;   
+                state.totalPrice += state.sauces[sauceIndex].price;
+                state.totalAmount += 1;
             }
         },
         deleteSauceById: (state,action)=>{
@@ -172,6 +180,9 @@ const cartSlice = createSlice({
         },
         resetMessages:(state,action)=>{
             state.successMessage = '';
+        },
+        resetStatus:(state,action)=>{
+            state.status='';
         }
     },
     extraReducers:{
@@ -199,7 +210,8 @@ export const {
     addSauceById,
     deleteSauceById,
     resetCart,
-    resetMessages
+    resetMessages,
+    resetStatus
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

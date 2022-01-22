@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {orderPizza, resetCart} from "../../store/pizza/cart-reducer";
+import {orderPizza, resetCart, resetStatus} from "../../store/pizza/cart-reducer";
 import Pizza from "./Pizza";
 import Sauce from "./Sauce";
 import PizzaWithIngredient from "./PizzaWithIngredient";
@@ -72,6 +72,12 @@ const Cart = () => {
             navigate('/');
         }
     }, [status, navigate, dispatch]);
+
+    useEffect(()=>{
+        return ()=>{
+            dispatch(resetStatus());
+        }
+    },[dispatch]);
 
     if (pizzas.length === 0 && sauces.length === 0 &&
         pizzasWithChangedIngredients.length === 0) {

@@ -1,7 +1,7 @@
 from marshmallow import fields, validate
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, SQLAlchemySchema
 
-from src.models import Sauce, Ingredient, Pizza, Order
+from ..models import Sauce, Ingredient, Pizza, Order
 
 
 class SauceSchema(SQLAlchemyAutoSchema):
@@ -34,7 +34,7 @@ class PartialSauceSchema(SQLAlchemySchema):
         model = Sauce
 
     id = fields.String(required=True)
-    count = fields.Decimal(required=True)
+    count = fields.Integer(required=True)
 
 
 class OrderSchema(SQLAlchemyAutoSchema):

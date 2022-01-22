@@ -2,9 +2,9 @@ import json
 import os
 from typing import Callable
 
-from src.db import db
-from src.models import Ingredient, Pizza, Sauce
-from src.settings import DATA_DIR
+from .db import db
+from .models import Ingredient, Pizza, Sauce
+from .settings import DATA_DIR
 
 
 def insert_data(cls, filename: str, func: Callable = None, rel_cls=None, relation_name: str = '') -> None:
@@ -33,6 +33,7 @@ def insert_with_relation(cls: db.Model, rel_cls: db.Model, filename: str, relati
 
 
 def read_and_save_data_to_db() -> None:
+    db.drop_all()
     db.create_all()
 
     models = [

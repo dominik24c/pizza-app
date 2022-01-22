@@ -1,6 +1,6 @@
 import pytest
 
-from src.main import create_app
+from src import create_app
 from src.utils import read_and_save_data_to_db
 
 

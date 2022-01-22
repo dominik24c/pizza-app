@@ -1,10 +1,11 @@
 from pprint import pprint
 
-from flask import Blueprint, make_response, jsonify, Response, request, abort
+from flask import Blueprint, make_response, jsonify, Response, request
 from marshmallow.exceptions import ValidationError
 
-from src.models import Sauce, Ingredient, Pizza
-from src.schemas import SauceSchema, IngredientSchema, PizzaSchema, OrderSchema
+from ..db import db
+from ..models import Sauce, Ingredient, Pizza, Order, SauceOrder, PizzaOrder
+from ..schemas import SauceSchema, IngredientSchema, PizzaSchema, OrderSchema
 
 bp = Blueprint("pizza", __name__)
 
@@ -34,16 +35,38 @@ def get_ingredients() -> Response:
 @bp.route('/order', methods=['POST'])
 def create_order() -> tuple[dict, int]:
     try:
+        '''Validate order data'''
         data = request.get_json()
         order_schema = OrderSchema()
-        res = order_schema.load(data)
+        order_data = order_schema.load(data)
+        pprint(order_data)
+        pizza_data = order_data.pop('pizza', None)
+        sauce_data = order_data.pop('sauce', None)
 
-        pprint(res)
+
+
+        '''Create order and save to db'''
+        order = Order(total=order_data['total'])
+        if sauce_data is not None:
+            for data in sauce_data:
+                sauce_order = SauceOrder(sauce_id=data['id'], amount=data['count'])
+                order.sauce_orders.append(sauce_order)
+        for data in pizza_data:
+            pizza_order = PizzaOrder(pizza_id=data['id'])
+            ingredients_data = data.pop('ingredients', None)
+            if ingredients_data is not None:
+                for ingredient_id in ingredients_data:
+                    pizza_order.ingredients.append(Ingredient.query.get(ingredient_id))
+            order.pizza_orders.append(pizza_order)
+
+        db.session.add(order)
+        db.session.commit()
+
     except ValidationError as e:
         print(e)
-        abort(make_response(jsonify(e.messages), 422))
+        return e.messages, 422
     except Exception as e:
         print(e)
-        abort(make_response(jsonify({"error": "Server Error!"}), 500))
+        return {"error": "Server Error!"}, 500
     else:
         return {'message': 'Order accepted!'}, 201
