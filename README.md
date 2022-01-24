@@ -1,70 +1,177 @@
-# Getting Started with Create React App
+## Pizza App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Frontend
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
+#### 1. Development
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser. The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+```bash
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
+#### 2. Production
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+$ npm run build
+```
+Deploy these files to s3 bucket service
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Backend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Before operations go to backend directory
 
-### `npm run eject`
+```bash
+$ cd backend
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### 1. Development
+#### 1.1 Database settings
+Create .env file with below configuration 
+```bash
+$ touch .env
+```
+```dotenv
+FLASK_APP=wsgi.py
+FLASK_ENV=development
+DB_USERNAME=username
+DB_PASSWORD=password
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=pizza
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Connect with postgresql server create user and pizza database
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```postgresql
+CREATE USER username WITH PASSWORD 'password';
+CREATE DATABASE pizza;
+GRANT ALL PRIVILEGES ON DATABASE pizza TO username;
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Create tables by using below commands
 
-## Learn More
+```bash
+$ flask db upgrade
+$ flask create-db
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### 1.2 Run application
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+$ pipenv shell
+$ pipenv install
+$ chmod +x ./run.sh
+$ ./run.sh
+```
 
-### Code Splitting
+#### 2. Tests
+Use below commands to run tests
+```bash
+$ flask shell
+$ pytest
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 3. Production
+Create ec2 instance on aws dashboard (choose ubuntu distro).
+Copy directory backend to server example by using sftp client
+```bash
+$ sftp -i ~/key.pem username@hostname
+sftp> put -r /path/to/backend
+```
+Connect to your virtual machine
+```bash
+$ ssh -i ~/key.pem username@hostname
+```
+Update ubuntu
+```bash
+sudo apt update
+```
+Next change name backend to app and go to this directory
+```bash
+$ mv backend app
+$ cd app
+```
 
-### Analyzing the Bundle Size
+#### 3.1 Database settings
+Install postgres server. Next use this same configuration settings,
+what you use in development mode, but change FLASK_ENV variable to:
+```dotenv
+FLASK_ENV=production
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+#### 3.2 Run application
+Create virtual environment 
+```shell
+pipenv shell
+pipenv install
+```
+Update service configuration in ExecStart copy path from result of above command `pipenv shell`: 
+```unit file (systemd)
+[Service]
+User=username
+...
+WorkingDirectory=/home/username/app
+EnvironmentFile=/home/username/app/.env
+ExecStart=/home/username/.local/share/virtualenvs/app-aIM2PLqO/bin/gunicorn --workers 1 --bind unix:/home/username/app/pizza_app.sock -m 007 wsgi:app
+...
+```
+Change group access to the application folder 
+```bash
+$ sudo chgrp www-data /home/username/app
+```
 
-### Making a Progressive Web App
+Move or copy pizza_app.service to /etc/systemd/system and run service
+```bash
+$ sudo cp ~/app/pizza_app.service /etc/systemd/system
+$ sudo systemctl start pizza_app
+$ sudo systemctl enable pizza_app
+$ sudo systemctl status pizza_app
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### 3.3 Nginx
+First change nginx.conf settings. You choose correct path pizza_app.sock and change server_name
+```nginx configuration
+server {
+    server_name hostname;
+    ...
+    location / {
+        ...
+        proxy_pass http://unix:/home/ubuntu/pizza_app.sock;
+    }
+}
+```
+Next install nginx server.
+Move or copy nginx configuration nginx.conf to `/etc/nginx/sites-available`. 
+Then remove or unlink default settings in this directory.
+Create soft link the file to the `/etc/nginx/sites-enabled` directory
 
-### Advanced Configuration
+```bash
+$ sudo apt install nginx
+$ sudo unlink /etc/nginx/sites-enabled/default
+$ sudo cp ~/app/nginx.conf /etc/nginx/sites-available/
+$ sudo ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled
+$ sudo nignx -t
+$ sudo systemctl start nginx
+$ sudo systemctl enable nginx
+$ sudo systemctl status nginx
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### 4. Link to website
+Pizza application: http://pizza-app-s3.s3-website.eu-central-1.amazonaws.com 
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### 5. Link to api
+API: http://ec2-3-64-215-105.eu-central-1.compute.amazonaws.com:5000 \
+Restful urls:
+* List of sauces
+  * GET /api/sauce
+* List of ingredients
+  * GET /api/ingredient
+* List of pizza
+  * GET /api/pizza 
+* Add a new order of pizza
+  * POST /api/order 

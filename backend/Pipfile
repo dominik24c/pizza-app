@@ -9,9 +9,12 @@ marshmallow-sqlalchemy = "*"
 flask-marshmallow = "*"
 flask-sqlalchemy = "*"
 pytest = "*"
-flask-migrate = "*"
 flask-cors = "*"
 psycopg2-binary = "*"
+python-dotenv = "*"
+gunicorn = "*"
+flask-migrate = "*"
+wheel = "*"
 
 [dev-packages]
 

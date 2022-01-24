@@ -1,7 +1,5 @@
 import os
 
-from .settings import BASE_DIR
-
 
 class Config:
     """Base config, uses staging database server."""
@@ -9,7 +7,8 @@ class Config:
     DB_SERVER = 'localhost'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(BASE_DIR, "..", "db.sqlite")}'
-    SQLALCHEMY_DATABASE_URI = f'postgresql://admin1:password@localhost:5432/pizza'
+    SQLALCHEMY_DATABASE_URI = f'postgresql://{os.environ.get("DB_USERNAME")}:{os.environ.get("DB_PASSWORD")}@' \
+                              f'{os.environ.get("DB_HOST")}:{os.environ.get("DB_PORT")}/{os.environ.get("DB_NAME")}'
 
 
 class ProductionConfig(Config):
@@ -28,7 +27,7 @@ class TestingConfig(Config):
 
 
 config = {
-    'dev': DevelopmentConfig,
-    'prod': ProductionConfig,
-    'test': TestingConfig,
+    'development': DevelopmentConfig,
+    'production': ProductionConfig,
+    'testing': TestingConfig,
 }
