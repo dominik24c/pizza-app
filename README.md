@@ -72,7 +72,7 @@ $ ./run.sh
 #### 2. Tests
 Use below commands to run tests
 ```bash
-$ flask shell
+$ pipenv shell
 $ pytest
 ```
 
